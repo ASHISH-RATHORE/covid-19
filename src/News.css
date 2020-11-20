@@ -1,0 +1,17 @@
+.news{
+    width: 10px;
+    flex:0.5;
+}
+
+#carouselExampleSlidesOnly{
+    border: 2px solid !important;
+    width: 500px;
+    height: 100px;
+    
+    
+}
+
+.carousel-inner{
+    width: 400px !important;
+    height: 150px !important;
+}

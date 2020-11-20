@@ -1,0 +1,16 @@
+.box_cases {
+
+    color: red;
+    
+}
+
+.box_total{
+    color: grey;
+}
+
+.cards{
+    flex: 1;
+    justify-content: space-evenly;
+    margin: 10px;
+    
+}
