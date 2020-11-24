@@ -32,12 +32,12 @@ function Box({title,cases,total,color}) {
 
     return (
         <div className="cards" ><Card >
-            <CardContent >
+            <CardContent className="content" >
                 <Typography className="box_title" color="primary">
-                    {title}
+                {title} 
                 </Typography>
-               <h2 className="box_cases">Today's Cases<br></br>{test(cases)} </h2> 
-                <Typography className="box_total">{test(total)} Total Cases</Typography>
+               <h2 className="box_cases"><h6>Today's Cases</h6><h5>{test(cases)}</h5> </h2> 
+                <Typography className="box_total"><h6>Total Cases</h6> {test(total)} </Typography>
             </CardContent>
         </Card> </div>
         )

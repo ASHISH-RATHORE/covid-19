@@ -2,6 +2,8 @@
 
     color: red;
     
+    
+    
 }
 
 .box_total{
@@ -9,8 +11,11 @@
 }
 
 .cards{
-    flex: 1;
+    flex-basis:50%;
     justify-content: space-evenly;
-    margin: 10px;
-    
+    margin: 20px;
+    padding: 20px;
+    height: auto;    
 }
+
+

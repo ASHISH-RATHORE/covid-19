@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import axios from "axios";
 
 
 import { CardContent, FormControl,MenuItem,Select } from '@material-ui/core';
@@ -83,7 +84,7 @@ function App() {
 
       setMapCenter([data.countryInfo.lat,data.countryInfo.long]);
       console.log(data.countryInfo );
-      setMapZoom(6);
+      setMapZoom(19);
 
     });
   };
@@ -98,13 +99,13 @@ function App() {
 
       <div className="app_header">
         
-      <h1>COVID-19 TRACKER</h1>
+      <h3><img src="girlmask.jpg" alt="mask" className="mask"/>TRACKER</h3>
 {/*1---header */}
       <FormControl className="app_dropdown">
         <Select variant="outlined" onChange={onCountryChange} value={country}>
-          <MenuItem value="WorldWide">WorldWide</MenuItem>
+          <MenuItem className="menu" value="WorldWide">WorldWide</MenuItem>
         {countries.map((country)=>(
-          <MenuItem value={country.value}>{country.name}</MenuItem>
+          <MenuItem className="menu" value={country.value}>{country.name}</MenuItem>
         ))}         
 
         </Select>
@@ -131,7 +132,10 @@ function App() {
         
         
         <div className="app_mid_section">
-        <div className="mapping"><Map center={mapCenter} zoom={mapZoom}/></div>
+
+          <div className="col-md-6"><div className="mapping"><Map center={mapCenter} zoom={mapZoom}/></div></div>
+          <div className= "col-md-6"><div className="mapping"><News/></div></div>
+        
         
       </div>
 
