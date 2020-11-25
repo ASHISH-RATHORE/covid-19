@@ -20,28 +20,15 @@ function App() {
   const [countries, setcountries] = useState([]);
   const [country, setcountry]= useState("WorldWide");
   const [countryInfo,setCountryInfo]= useState({});
-  const [indianstates, setIndianstates]=useState([]);
+  const [data, setdata]=useState({iso3:'',flag:''});
   const  [mapCenter, setMapCenter] = useState({lat:32.349032,lng:24.498656});
   const  [mapZoom, setMapZoom] = useState(3);
+
+  
+
+
   
   ////------------------ fetch data from india specifi api----------------------------------------------------
-
- useEffect(() => {
-
-  const getApi= async()=>{
-    await fetch("https://disease.sh/v3/covid-19/gov/India").then((response)=>response.json())
-    .then((data)=>{
-      console.log(data);
-      const mapped= data.states.map((states)=>({
-        sname:states.state,
-        
-      }));
-      setIndianstates(mapped);
-    });
-  };
-   getApi();
-   console.log(getApi);
- },[]);
 
 //----------------------------------------------------------------------------------------------------------------
 
@@ -83,6 +70,7 @@ function App() {
       setCountryInfo(data);
 
       setMapCenter([data.countryInfo.lat,data.countryInfo.long]);
+      setdata([data.countryInfo.iso3,data.countryInfo.flag]);
       console.log(data.countryInfo );
       setMapZoom(19);
 
@@ -99,7 +87,7 @@ function App() {
 
       <div className="app_header">
         
-      <h3><img src="girlmask.jpg" alt="mask" className="mask"/>TRACKER</h3>
+      <img src="girlmask.jpg" alt="mask" className="mask"/><h3 class="title">TRACKER</h3>
 {/*1---header */}
       <FormControl className="app_dropdown">
         <Select variant="outlined" onChange={onCountryChange} value={country}>
@@ -133,7 +121,7 @@ function App() {
         
         <div className="app_mid_section">
 
-          <div className="col-md-6"><div className="mapping"><Map center={mapCenter} zoom={mapZoom}/></div></div>
+          <div className="col-md-6"><div className="mapping"><Map newdata={data}center={mapCenter} zoom={mapZoom}/></div></div>
           <div className= "col-md-6"><div className="mapping"><News/></div></div>
         
         

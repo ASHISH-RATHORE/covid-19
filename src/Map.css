@@ -17,3 +17,12 @@ height: 100%;
 width: 100%;
     
 }
+
+.flag{
+    width: 50px;
+}
+
+.name{
+text-align: center;
+font-size: 30px;
+}
