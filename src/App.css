@@ -28,6 +28,14 @@ body{
 @media (max-width:990px){
     .app{
         flex-direction: column;
+        
+    }
+    .app_stats{
+        display: flex !important;
+        flex-direction: columns !important;
+        justify-content: center;
+        
+        align-items: center;
     }
 }
 
@@ -38,11 +46,14 @@ body{
      
 }
 
-.app_mid_section{
-    display: flex;
-}
+
 
 .title{
         margin-right: auto;
     font-size: 27px;
+    margin-top: 23px;
+}
+
+.carousel-item h6{
+    font-size: 12px !important;
 }

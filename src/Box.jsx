@@ -31,13 +31,16 @@ function Box({title,cases,total,color}) {
         
 
     return (
-        <div className="cards" ><Card >
+        <div className="cards" >
+            <Card className="card_cases"  >
             <CardContent className="content" >
-                <Typography className="box_title" color="primary">
-                {title} 
+                <Typography className="box_title" color="primary" >
+                {title} <hr></hr>
                 </Typography>
-               <h2 className="box_cases"><h6>Today's Cases</h6><h5>{test(cases)}</h5> </h2> 
-                <Typography className="box_total"><h6>Total Cases</h6> {test(total)} </Typography>
+          <div className="show_cases">               
+    <div><h6 className="box_cases">Today's Cases</h6>{test(cases)} </div>
+    <div><h6 className="box_total">Total Cases</h6> {test(total)}</div>
+         </div>
             </CardContent>
         </Card> </div>
         )

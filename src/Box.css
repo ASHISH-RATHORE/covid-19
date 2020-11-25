@@ -1,13 +1,14 @@
 .box_cases {
 
-    color: red;
+    color: black;
     
     
     
 }
 
 .box_total{
-    color: grey;
+    color: black;
+    font-size: 15px;
 }
 
 .cards{
@@ -15,7 +16,65 @@
     justify-content: space-evenly;
     margin: 20px;
     padding: 20px;
-    height: auto;    
+    height: auto; 
+    
+      
+}
+
+.box_cases{
+    font-size: 15px;
+    
+}
+
+.box_title{
+    font-size: 30px !important;
+
+}
+
+.box_cases {
+    font-size: 12px;
 }
 
 
+.box_total {
+    font-size: 12px;
+}
+
+.card_cases{
+    
+    border: 0.5px solid lightblue !important;
+}
+
+
+/* display specs for mobile and tablet */
+
+@media (max-width:990px){
+.cards {
+    display: inline-flex;
+   flex-basis: 50%;
+    height: 200px;
+    width: 150px;
+    
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    justify-content: space-around;
+    align-content: space-around;
+
+
+} 
+
+.box_title{
+    font-size: 14px !important;
+
+}
+
+.show_cases{
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: space-between;
+}
+
+}
