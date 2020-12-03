@@ -3,28 +3,33 @@ import Box from './Box';
 import Map from "./Map";
 import "leaflet/dist/leaflet.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import axios from "axios";
+
 
 
 import { CardContent, FormControl,MenuItem,Select } from '@material-ui/core';
 import './App.css';
+import Progress from './Progress';
+import News from './News';
 
 
 
 
 function App() {
-
+  
+  const [allpop,setallpop]=useState();
   const [countries, setcountries] = useState([]);
   const [country, setcountry]= useState("WorldWide");
   const [countryInfo,setCountryInfo]= useState({});
   const [data, setdata]=useState({iso3:'',flag:''});
   const  [mapCenter, setMapCenter] = useState({lat:32.349032,lng:24.498656});
   const  [mapZoom, setMapZoom] = useState(1);
+
+
+
   
-  console.log(countryInfo);
+  
   
 
 
@@ -37,6 +42,7 @@ function App() {
   useEffect(()=>{
     fetch('https://disease.sh/v3/covid-19/all').then((response)=>response.json()).then((data)=>{
       setCountryInfo(data);
+      
     });
   },[]);
   
@@ -67,11 +73,29 @@ function App() {
  
     await fetch(url).then((response)=>response.json())
     .then((data)=>{
+            
       setcountry(countryCode);
       setCountryInfo(data);
+      
+      setallpop(data.population);
+      
+     
 
-      setMapCenter([data.countryInfo.lat,data.countryInfo.long]);
-      setdata([data.countryInfo.iso3,data.countryInfo.flag]);
+      
+      /////
+      setcountry(countryCode);
+      setCountryInfo(data);
+      // console.log(data);
+////
+      if(countryCode==='WorldWide'){
+        setMapCenter({lat:32.349032,lng:24.498656});
+        setdata({iso3:global,flag:null});
+      }else{
+        setMapCenter([data.countryInfo.lat,data.countryInfo.long])
+        setdata([data.countryInfo.iso3,data.countryInfo.flag]);
+      
+      }
+      /////
       
       setMapZoom(19);
 
@@ -79,7 +103,7 @@ function App() {
   };
 
   
- 
+//  console.log(countryInfo);
 
   return(
 
@@ -117,7 +141,7 @@ function App() {
      
 
       <FormControl className="app_dropdown">
-        <Select variant="outlined" onChange={onCountryChange} value={country}>
+        <Select variant="standard" onChange={onCountryChange} value={country}>
           <MenuItem className="menu" value="WorldWide">WorldWide</MenuItem>
         {countries.map((country)=>(
           <MenuItem className="menu" value={country.value}>{country.name}</MenuItem>
@@ -130,17 +154,27 @@ function App() {
       </div>
 
       
+
+
+
+<div className="app_stats">
+
+<Box  title="CoronaVirus Cases " cases={countryInfo.todayCases} total={countryInfo.cases} />
+<Box  title="Recovered Cases" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
+<Box  title="Fatal Cases " cases={countryInfo.todayDeaths} total={countryInfo.deaths}  />
+</div>
+
+<div className="circular"> 
+
+<div><Progress title="Population Affected" cases={countryInfo.cases} total={allpop} /></div>
+<div><Progress title="Recovery Rate" cases={countryInfo.recovered} total={countryInfo.cases}/></div>
+ 
+ 
+ 
+ 
+ </div>
+       
       
-
-      <div className="app_stats">
-
-        <Box  title="CoronaVirus Cases " cases={countryInfo.todayCases} total={countryInfo.cases} />
-        <Box  title="Recovered Cases" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
-        <Box  title="Fatal Cases " cases={countryInfo.todayDeaths} total={countryInfo.deaths}  />
-
-        
-      </div>
-
        
         
         
@@ -148,7 +182,16 @@ function App() {
         
         <div className="app_mid_section">
 
-          <div className="col-md-12"><div className="mapping"><Map active={countryInfo.active} newdata={data}center={mapCenter} zoom={mapZoom}/></div></div>
+          <div className="col-md-6">
+            <div className="mapping">
+              <Map active={countryInfo.active} newdata={data}center={mapCenter} zoom={mapZoom}/>
+              </div>
+              </div>
+
+              <div className="col-md-6">
+                <News/>
+              
+              </div>
          
          
       </div>

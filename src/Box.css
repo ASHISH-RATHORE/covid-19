@@ -3,22 +3,49 @@
     color: black;
     
     
-    
 }
+
 
 .box_total{
     color: black;
-    font-size: 15px;
+    font-size: 15px !important;
+      
+    text-align: center !important;
 }
 
-.cards{
-    flex-basis:50%;
-    justify-content: space-evenly;
-    margin: 20px;
-    padding: 20px;
-    height: auto; 
+
+.show_cases div{
+    text-align: center;
+    font-size: 35px!important;
+}
+
+.show_cases div:nth-child(2){
+    font-size: 20px!important;
+    text-align: center !important;
+}
+
+.badge{
+    vertical-align: super !important;
+    height: 15px !important;
+    font-size: 15px !important;
     
-      
+}
+
+
+    
+.cards{
+    
+    flex-basis: 20%;
+    justify-content: space-around !important;
+    align-items: stretch;
+    margin: 8px;
+    padding: 10px;
+    height: 200px; 
+    width: 250px !important;
+   margin: 10px;
+   margin-top: 30px;
+   
+         
 }
 
 .box_cases{
@@ -27,22 +54,21 @@
 }
 
 .box_title{
-    font-size: 30px !important;
+    font-size: 20px !important;
+    text-align: center !important;
 
 }
 
 .box_cases {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 
-.box_total {
-    font-size: 12px;
-}
 
 .card_cases{
     
     border: 0.5px solid lightblue !important;
+    box-shadow: 4px 3px 3px 1px  !important;
 }
 
 
@@ -74,7 +100,15 @@
     display: flex;
     height: auto;
     width: auto;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
+    justify-content: center;
 }
 
+}
+
+.badge
+{
+    font-size: 10px !important;
+    height: 15px;
 }

@@ -1,11 +1,23 @@
-import { indigo } from '@material-ui/core/colors';
-import React from 'react';
+
+import React,{useEffect,useState} from 'react';
 import {MapContainer ,Marker,Circle,Popup,TileLayer} from "react-leaflet";
 import "./Map.css";
 import "leaflet/dist/leaflet.css";
+import icon from '../node_modules/leaflet/dist/images/marker-icon.png';
+import iconShadow from '../node_modules/leaflet/dist/images/marker-shadow.png';
+import L from 'leaflet';
+
+
 
 
 function Map({center,zoom,newdata,active}) {
+
+
+   
+
+    
+
+ 
 
 
 
@@ -31,12 +43,18 @@ function Map({center,zoom,newdata,active}) {
         : Math.abs(Number(labelValue));
     
     }
+    let DefaultIcon = L.icon({
+        iconUrl: icon,
+        shadowUrl: iconShadow,
+    });
 
+    L.Marker.prototype.options.icon = DefaultIcon;
+    
     
     return (
         <div className="map">
 
-            <MapContainer center={center} zoom={zoom}>
+            <MapContainer center={center} zoom={zoom} scrollWheelZoom={false}>
                 <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -48,12 +66,13 @@ function Map({center,zoom,newdata,active}) {
                     </Popup>
 
                     <Circle
+      
+      
       center={center}
-      color='transparent'
-      fillColor='red'
-      fillOpacity={0.3}
-      radius={600000}
-            />
+      
+      
+      
+      />
                 </Marker>
             </MapContainer>
 

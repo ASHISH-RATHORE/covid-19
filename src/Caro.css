@@ -1,0 +1,38 @@
+.sheet{
+    height: 370px;
+    overflow-y: auto;
+    width: 600px;
+    margin-top: 10px;
+    scroll-behavior: smooth !important;
+
+    
+   }
+
+.card-title{
+   margin-top: -50px;
+   font-weight: 50px;
+   color: white;
+   font-size: 20px;
+}
+
+.sheet a{
+    font-size: 12px;
+}
+
+
+.highlights{
+
+    color: black !important;
+    font-size: 20px !important;
+    margin-left: 250px;
+    margin-top: 100px !important;
+    position: static !important;
+}
+
+.card-body{
+    background:aliceblue;
+}
+
+
+
+     

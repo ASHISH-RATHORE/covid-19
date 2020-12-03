@@ -1,0 +1,9 @@
+.circular-progress  h6{ 
+
+    font-weight: 100 !important;
+    text-align: center !important;
+}
+
+.CircularProgressbar-path {
+    transition: stroke-dashoffset 0.5s ease 0s;  
+  }

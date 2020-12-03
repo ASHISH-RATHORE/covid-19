@@ -15,15 +15,15 @@ function Box({title,cases,total,color}) {
         // Nine Zeroes for Billions
         return Math.abs(Number(labelValue)) >= 1.0e+9
     
-        ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
+        ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
         // Six Zeroes for Millions 
         : Math.abs(Number(labelValue)) >= 1.0e+6
     
-        ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
         // Three Zeroes for Thousands
         : Math.abs(Number(labelValue)) >= 1.0e+3
     
-        ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
+        ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
     
         : Math.abs(Number(labelValue));
     
@@ -38,8 +38,13 @@ function Box({title,cases,total,color}) {
                 {title} <hr></hr>
                 </Typography>
           <div className="show_cases">               
-    <div><h6 className="box_cases">Today's Cases</h6>{test(cases)} </div>
-    <div><h6 className="box_total">Total Cases</h6> {test(total)}</div>
+    
+    <div> { (!total)?<div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>:test(total)}</div> 
+      <div>{(!cases)?<div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>:test(cases)}<span className="badge badge-danger new">New</span></div>
          </div>
             </CardContent>
         </Card> </div>

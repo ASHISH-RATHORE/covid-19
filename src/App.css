@@ -7,20 +7,50 @@ margin: 0;
     align-items: center;
     margin-bottom: 20px;
     justify-content: space-between;
-    height: 60px;
+    height: 90px;
     background: rgb(120,217,174);    
     
 }
 
 body{
     background-color: aliceblue;
+    margin-top: 0px !important;
 }
 .app_stats{
     display: flex;
-    margin-top: -40px;
+    margin-top: 10px;
+    justify-content: center;
     
+}
+
+.circular{
+    background: aliceblue;
+    display: flex;
+    justify-content: space-evenly !important;
+    height: 180px;
+    width: 350px;
+    margin-top: 30px;
+    margin-left: 500px;
+
+
+}
+
+.circular div:nth-child(1){
+    margin: 10px !important;
+    padding: 5px;
+}
+
+.circular div:nth-child(2){
+    margin: 10px !important;
+    padding: 5px;
+ 
+}
+
+.app_mid_section{
+    display: flex;
     
-    justify-content: space-between;
+    margin-left: 100px;
+ padding: 0%;
 }
 
 
@@ -37,12 +67,14 @@ body{
         
         align-items: center;
     }
+
+    
 }
 
 
 .mask{
     background-repeat: no-repeat;
-    height: 60px;
+    height: 90px;
      
 }
 
@@ -50,10 +82,12 @@ body{
 
 .title{
         margin-right: auto;
-    font-size: 27px;
+    font-size: 40px;
     margin-top: 23px;
+    font-weight: bold;
 }
 
 .carousel-item h6{
     font-size: 12px !important;
 }
+

@@ -1,12 +1,10 @@
 import React, { useEffect,useState,Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery/dist/jquery';
-import Popper from 'popper.js';
+
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './News.css';
-import api,{params} from "./service/api";
-import axios from "axios";
-import Card from './Card';
+import axios from 'axios';
+import Caro from './Caro';
 
 
 
@@ -14,31 +12,44 @@ import Card from './Card';
 
 function News() {
 
-    const [trial, settrial] = useState();
+
+
+
+  const [response, setresponse] = useState([]);
+//  console.log(response);
+
+  useEffect(() => {
+
+    const res= async()=>{
+
+     try{
+
+      const data= await axios.get('https://gnews.io/api/v4/top-headlines?q=coronavirus&lang=en&token=ea05a8e34e24685378756f99067ac968');
+               setresponse(data.data.articles);
+
+     }catch(err){
+       console.log(err);
+     }
+
+
+
+
+    }
+    res();
+    
+  },[])
+
+  
     
 
-    useEffect(() => {
-
-      const getApi= async()=>{
-        await fetch("http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cafa8a8552e04f6fa2d1ae1f5a324732").then((response)=>response.json())
-        .then((data)=>{
-          
-          settrial(data);
-        });
-      };
-       getApi();
-       
-     },[]);
-    
-     
 
   
 
     return (
        <Fragment>
-
-        <Card article={trial}/>
-         
+      
+      <Caro  res={response}/>
+     
        </Fragment> 
         )
 };
