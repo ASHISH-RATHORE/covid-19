@@ -19,13 +19,14 @@ function Map({center,zoom,newdata,active}) {
 
  
 
-
+console.log('data',newdata,newdata[1]);
 
     
 
 
 
     function test (labelValue) {
+
 
         // Nine Zeroes for Billions
         return Math.abs(Number(labelValue)) >= 1.0e+9
@@ -62,7 +63,17 @@ function Map({center,zoom,newdata,active}) {
                 <Marker position={center}>
                     
                     <Popup className="popup">
-                        <img className="flag"src={newdata[1]} alt="WorldWide"/><h6 className="name">Active Cases-{test(active)}</h6>
+                        {
+                            (newdata[1] != undefined) ? <img className="flag" height="20" width="25" src={newdata[1]} alt="WorldWide"/> 
+                            : <img className="flag"src={newdata.flag} alt="WorldWide" height="20" width="25" />
+                        }
+
+                        {/* { if(newdata[1]!= undefined){
+                            <img className="flag"src={newdata[1]} alt="WorldWide"/>
+                        }else{
+                            <img className="flag"src={newdata.flag} alt="WorldWide"/>     
+                        }} */}
+                        <h6 className="name">Active Cases-{test(active)}</h6>
                     </Popup>
 
                     <Circle

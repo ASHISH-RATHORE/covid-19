@@ -3,7 +3,7 @@ import Box from './Box';
 import Map from "./Map";
 import "leaflet/dist/leaflet.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import TextField from "@material-ui/core/TextField";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
@@ -17,7 +17,7 @@ import News from './News';
 
 
 function App() {
-  
+  const [isloading,setIsloading]=useState(true);
   const [allpop,setallpop]=useState();
   const [countries, setcountries] = useState([]);
   const [country, setcountry]= useState("WorldWide");
@@ -28,15 +28,9 @@ function App() {
 
 
 
-  
-  
-  
 
 
   
-  ////------------------ fetch data from india specifi api----------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------------
 
 
   useEffect(()=>{
@@ -46,10 +40,18 @@ function App() {
     });
   },[]);
   
-
+  // const getCountriesData=async()=>{
+  //   await fetch("https://disease.sh/v3/covid-19/countries").then((response)=>response.json())
+  //   .then((data)=> {
+  //     const countries=data.map((country)=>({
+  //       name:country.country,
+  //       value:country.countryInfo.iso3,
+  //     }));
+  //     setcountries(countries);
+  //   });
+  // };
 
   useEffect(() => {
-  
     const getCountriesData=async()=>{
       await fetch("https://disease.sh/v3/covid-19/countries").then((response)=>response.json())
       .then((data)=> {
@@ -58,41 +60,43 @@ function App() {
           value:country.countryInfo.iso3,
         }));
         setcountries(countries);
+        setIsloading(false);
       });
     };
+    
     getCountriesData();
   }, []);
+
+
 
  const onCountryChange= async (e)=>{
    const countryCode= e.target.value;
    
    setcountry(countryCode);
-
+    setIsloading(true);
    const url= countryCode==='WorldWide' ? 'https://disease.sh/v3/covid-19/all'
    :`https://disease.sh/v3/covid-19/countries/${countryCode}`
  
     await fetch(url).then((response)=>response.json())
     .then((data)=>{
-            
+      data.flag = "../public/earth.png";
       setcountry(countryCode);
       setCountryInfo(data);
-      
+      setIsloading(false);
       setallpop(data.population);
+      
       
      
 
       
-      /////
-      setcountry(countryCode);
-      setCountryInfo(data);
-      // console.log(data);
-////
       if(countryCode==='WorldWide'){
         setMapCenter({lat:32.349032,lng:24.498656});
-        setdata({iso3:global,flag:null});
+        setdata({iso3:global,flag:process.env.PUBLIC_URL+"/earth.png"});
+        
       }else{
         setMapCenter([data.countryInfo.lat,data.countryInfo.long])
         setdata([data.countryInfo.iso3,data.countryInfo.flag]);
+        
       
       }
       /////
@@ -103,7 +107,7 @@ function App() {
   };
 
   
-//  console.log(countryInfo);
+//  
 
   return(
 
@@ -141,10 +145,11 @@ function App() {
      
 
       <FormControl className="app_dropdown">
+      
         <Select variant="standard" onChange={onCountryChange} value={country}>
-          <MenuItem className="menu" value="WorldWide">WorldWide</MenuItem>
+          <MenuItem className="menu"   value="WorldWide">WorldWide</MenuItem>
         {countries.map((country)=>(
-          <MenuItem className="menu" value={country.value}>{country.name}</MenuItem>
+          <MenuItem className="menu"  id={country.name} value={country.value}>{country.name}</MenuItem>
         ))}         
 
         </Select>
@@ -159,9 +164,9 @@ function App() {
 
 <div className="app_stats">
 
-<Box  title="CoronaVirus Cases " cases={countryInfo.todayCases} total={countryInfo.cases} />
-<Box  title="Recovered Cases" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
-<Box  title="Fatal Cases " cases={countryInfo.todayDeaths} total={countryInfo.deaths}  />
+<Box  title="CoronaVirus Cases " cases={countryInfo.todayCases} total={countryInfo.cases} loading={isloading}/>
+<Box  title="Recovered Cases" cases={countryInfo.todayRecovered} total={countryInfo.recovered} loading={isloading} />
+<Box  title="Fatal Cases " cases={countryInfo.todayDeaths} total={countryInfo.deaths} loading={isloading} />
 </div>
 
 <div className="circular"> 

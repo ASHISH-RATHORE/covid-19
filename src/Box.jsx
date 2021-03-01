@@ -7,7 +7,7 @@ import countup from 'react-countup';
 
 
 
-function Box({title,cases,total,color}) {
+function Box({title,cases,total,color,loading}) {
 
 
     function test (labelValue) {
@@ -39,10 +39,10 @@ function Box({title,cases,total,color}) {
                 </Typography>
           <div className="show_cases">               
     
-    <div> { (!total)?<div className="spinner-border" role="status">
+    <div> { (loading)?<div className="spinner-border" role="status">
         <span className="sr-only">Loading...</span>
       </div>:test(total)}</div> 
-      <div>{(!cases)?<div className="spinner-border" role="status">
+      <div>{(loading)?<div className="spinner-border" role="status">
         <span className="sr-only">Loading...</span>
       </div>:test(cases)}<span className="badge badge-danger new">New</span></div>
          </div>
